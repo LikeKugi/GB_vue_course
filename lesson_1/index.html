@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+  </head>
+  <body>
+    <div id="app">
+      {{message}}
+      <p>Products in Cart {{count}}</p>
+      <button @click="cart.prod1 = true" v-if="!cart.prod1">add to cart</button>
+      <button @click="cart.prod1 = false" v-else>remove from cart</button>
+      <button @click="cart.prod2 = true" v-if="!cart.prod2">add to cart</button>
+      <button @click="cart.prod2 = false" v-else>remove from cart</button>
+      <button @click="cart.prod3 = true" v-if="!cart.prod3">add to cart</button>
+      <button @click="cart.prod3 = false" v-else>remove from cart</button>
+      <button @click="cart.prod4 = true" v-if="!cart.prod4">add to cart</button>
+      <button @click="cart.prod4 = false" v-else>remove from cart</button>
+
+      <p v-if="permission">you can buy</p>
+      <p v-else>you can't buy</p>
+      <button @click="permission=true">already 14</button>
+      <button @click="permission=false">under 14</button>
+
+      <div>
+        <button @click="showMore">Show More</button>
+        {{showed}}
+        <div v-show="showed">Information</div>
+      </div>
+      <div class="number">
+        <button @click="generateNumber">generate</button>
+        <p>Generated: {{number}}</p>
+        <p>{{result}}</p>
+      </div>
+    </div>
+    <script type="module">
+      import Vue from "https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.esm.browser.js";
+
+      new Vue({
+        el: "#app",
+        data: {
+          message: "hello vue",
+          cart: {
+            prod1: false,
+            prod2: false,
+            prod3: false,
+            prod4: false,
+          },
+          permission: false,
+          showed: false,
+          number: 0,
+        },
+        methods: {
+          showMore() {
+            this.showed = !this.showed;
+          },
+          generateNumber() {
+            this.number = Math.floor(Math.random() * 11);
+          }
+        },
+        computed: {
+          count: function(){
+            return Object.values(this.cart).reduce((a, x) => x ? a + 1 : a, 0 );
+          },
+          result: function () {
+            return this.number < 5 ? 'less than 5' : this.number === 10 ? 'ten' : 'from 5 to 9'
+          }
+        }
+      });
+    </script>
+  </body>
+</html>
