@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible"
+          content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+  </head>
+  <body>
+    <p>Вы разрабатываете страницу для отображения информации о товаре. У вас есть объект product, который содержит
+      информацию о товаре, включая название, цену и URL изображения товара. Вам необходимо отобразить эту информацию на
+      странице с использованием v-bind.
+      Добавьте кнопку, которая будет изменять цену товара. При нажатии на кнопку должна генерироваться скидка на товар
+      от 1 до 20% и обновиться цена товара в соответствии с значением скидки</p>
+    <div id="app">
+      <p>{{product.info}}</p>
+      <p>{{product.description}}</p>
+      <p>{{calculatedPrice}}</p>
+      <button @click="generateDiscount">Sale</button>
+    </div>
+    <script>
+      new Vue({
+        el: "#app",
+        data: {
+          product: {
+            info: "Lorem ipsum dolor.",
+            description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias beatae debitis deleniti dolorum eaque enim, facere perspiciatis quos rem voluptatem!",
+            price: 300,
+          },
+          discount: 0,
+        },
+        methods: {
+          generateDiscount() {
+            this.discount = Math.floor(Math.random() * (20))
+          }
+        },
+        computed: {
+          calculatedPrice() {
+            return this.product.price - (this.product.price * this.discount / 100);
+          }
+        }
+      });
+    </script>
+  </body>
+</html>
