@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible"
+          content="ie=edge">
+    <title>Task 2 | Homework 2</title>
+    <script src="https://unpkg.com/vue@next"></script>
+  </head>
+  <body>
+    <p>
+      Вы разрабатываете приложение для отображения и сортировки списка товаров. У вас есть массив объектов products, где
+      каждый объект представляет товар с его названием и ценой. Вам необходимо отобразить список товаров и предоставить
+      пользователю возможность сортировать товары по цене (по возрастанию и по убыванию).
+    </p>
+    <div id="app">
+      <h1>Products</h1>
+      <table :style="tableStyle">
+        <thead :style="theadStyle">
+        <tr>
+          <th :style="tdStyle"
+              @click="sortProducts('name')">name
+          </th>
+          <th :style="tdStyle"
+              @click="sortProducts('price')">price
+          </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr v-for="product in products">
+          <td :style="tdStyle">{{product.name}}</td>
+          <td :style="tdStyle">{{product.price}}</td>
+        </tr>
+        </tbody>
+        <tfoot>
+        <tr>
+          <th>Order:</th>
+          <th>{{sorting}}</th>
+        </tr>
+        </tfoot>
+      </table>
+    </div>
+    <script>
+      const app = Vue.createApp({
+        data() {
+          return {
+            products: [
+              {name: "few1", price: 16},
+              {name: "gorged2", price: 5},
+              {name: "asfdd3", price: 32},
+              {name: "zrgd4", price: 54},
+              {name: "uredd5", price: 23},
+            ],
+            asc: "None",
+            tableStyle: {
+              maxWidth: 1200,
+              margin: "0 auto",
+              borderCollapse: "collapse",
+              border: "1px solid teal",
+            },
+            theadStyle: {
+              cursor: "pointer"
+            },
+            tdStyle: {
+              padding: "10px 20px",
+              border: "1px solid teal",
+            },
+          };
+        },
+        methods: {
+          sortProducts(value) {
+            this.products.sort((a, b) => this.asc ? a[value] > b[value] ? -1 : 1 : b[value] > a[value] ? -1 : 1);
+            this.asc = !this.asc;
+          },
+        },
+        computed: {
+          sorting() {
+            if (this.asc === "None") return this.asc;
+            if (this.asc) return "ASC";
+            return "DESC";
+          },
+        }
+      });
+      app.mount("#app");
+    </script>
+  </body>
+</html>
