@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+  </head>
+  <body>
+    <p>
+      Вам необходимо создать компонент "Товар", который будет отображать информацию о товаре, включая название, описание
+      и цену. Кроме того, вы должны реализовать фильтрацию товаров по цене (по возрастанию и убыванию)
+      Создайте компонент "Товар", который вы создавали в интернет-магазине BRAND
+      Создайте список товаров, используя компонент "Товар". Данные о товарах могут быть представлены в виде массива
+      объектов.
+      Добавьте две кнопки сортировки (по убыванию, по возрастанию)
+      При нажатии на кнопки, обновите список отображаемых товаров, отфильтрованных по цене.
+    </p>
+    <div id="app">
+      <todo-list/>
+    </div>
+    <script>
+      Vue.component("todo-form", {
+        methods: {
+          onsubmit(value) {
+            this.submitHandler(value);
+          },
+          sayHello() {
+            this.$emit('sayHi', 'Hello world!');
+          },
+          toTrigger() {
+            console.log('ZERG RUSH KEKEKE!')
+          }
+        },
+        props: [
+          "submitHandler",
+        ],
+        template: `
+          <div>
+
+          <button @click="sayHello">Hello world</button>
+          <button @click="onsubmit(true)">Asc</button><button @click="onsubmit(false)">Desc</button>
+          <button @click="onsubmit('None')">reset</button>
+          </div>`
+      });
+      Vue.component("todo-list", {
+        data: function () {
+          return {
+            products: [
+              {name: "few1", price: 16},
+              {name: "gorged2", price: 5},
+              {name: "asfdd3", price: 32},
+              {name: "zrgd4", price: 54},
+              {name: "uredd5", price: 23},
+            ],
+            asc: "None",
+          };
+        },
+        methods: {
+          setAsc(value) {
+            this.asc = value
+          },
+          greeting(data) {
+            console.log(data);
+          }
+        },
+        computed: {
+          newSuppliesList() {
+            if (this.asc === "None") return this.products;
+            return [...this.products].sort((a, b) => this.asc ? a.price < b.price ? -1 : 1 : b.price < a.price ? -1 : 1);
+          }
+        },
+        template: `
+          <div>
+          <button @click="$refs.kekeke.toTrigger()">ZERG RUSH!!!</button>
+          <todo-form :submit-handler="setAsc" @sayHi="greeting" ref="kekeke"/>
+          <div>
+            <div v-for="(todo, idx) in newSuppliesList">
+              {{ todo.name }} {{todo.price}}
+            </div>
+          </div>
+          </div>
+        `
+      });
+
+      new Vue({
+        el: "#app",
+        data: {},
+        methods: {},
+        computed: {}
+      });
+    </script>
+  </body>
+</html>

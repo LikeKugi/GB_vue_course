@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+  </head>
+  <body>
+    <p>
+      Создайте компонент списка дел, в котором можно добавлять и удалять элементы. Каждый элемент списка должен иметь
+      кнопку удаления, при нажатии на которую элемент списка будет удаляться.
+    </p>
+    <div id="app">
+      <todo-list />
+    </div>
+    <script>
+      Vue.component('todo-form', {
+        data: () => ({
+          newTodo: '',
+        }),
+        methods: {
+          onsubmit() {
+            this.submitHandler(this.newTodo);
+          }
+        },
+        props: [
+            'submitHandler',
+        ],
+        template: `<form @submit.prevent="onsubmit">
+        <label for="todo">
+          <input type="text" id="todo" placeholder="Todo..." v-model="newTodo">
+          <button type="submit">submit</button>
+        </label>
+        </form>`
+      })
+      Vue.component('todo-list', {
+        data: function () {
+          return {
+            todos: [1, 2, 3],
+          }
+        },
+        methods: {
+          submitHandler(data) {
+            this.todos.push(data)
+          },
+          deleteHandler(idx) {
+            this.todos = [...this.todos.slice(0, idx), ...this.todos.slice(idx+1)];
+          }
+        },
+        template: `
+          <div>
+            <todo-form :submit-handler="submitHandler"/>
+            <div>
+              <div v-for="(todo, idx) in todos">
+                {{todo}}
+                <button @click="deleteHandler(idx)">Delete</button>
+              </div>
+            </div>
+          </div>
+        `
+      })
+
+      new Vue({
+        el: "#app",
+        data: {},
+        methods: {},
+        computed: {}
+      });
+    </script>
+  </body>
+</html>

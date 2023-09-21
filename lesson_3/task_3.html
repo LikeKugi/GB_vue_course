@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+  </head>
+  <body>
+    <p>
+      Создайте компонент списка, который отображает массив элементов. Добавьте текстовое поле для фильтрации списка. При
+      вводе текста в поле, список должен автоматически обновляться, отображая только элементы, содержащие введенный
+      текст.
+    </p>
+    <div id="app">
+      <todo-list />
+    </div>
+    <script>
+      Vue.component('todo-form', {
+        data: () => ({
+          newTodo: '',
+        }),
+        methods: {
+          onsubmit() {
+            this.submitHandler(this.newTodo);
+          }
+        },
+        props: [
+          'submitHandler',
+        ],
+        template: `<form @submit.prevent>
+        <label for="todo">
+          <input type="text" id="todo" placeholder="Todo..." v-model="newTodo" @input.prevent="onsubmit">
+        </label>
+        </form>`
+      })
+      Vue.component('todo-list', {
+        data: function () {
+          return {
+            todos: ['Lorem ipsum dolor', 'sit amet, consectetur', 'error et facilis', 'Aliquam beatae deserunt'],
+            pattern: ''
+          }
+        },
+        methods: {
+          submitHandler(data) {
+            this.pattern = data;
+          }
+        },
+        computed: {
+          newTodoList() {
+            return this.todos.filter(el => this.pattern ? el.includes(this.pattern) : el)
+          }
+        },
+        template: `
+          <div>
+            <todo-form :submit-handler="submitHandler"/>
+            <div>
+              <div v-for="(todo, idx) in newTodoList">
+                {{todo}}
+              </div>
+            </div>
+          </div>
+        `
+      })
+
+      new Vue({
+        el: "#app",
+        data: {},
+        methods: {},
+        computed: {}
+      });
+    </script>
+  </body>
+</html>
