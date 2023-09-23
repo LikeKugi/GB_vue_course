@@ -1,7 +1,7 @@
 <script>
 export default {
-  name: "SupplyComponent",
-  props: ['title', 'price', 'description']
+  name: 'SupplyComponent',
+  props: ['title', 'price', 'description'],
 };
 </script>
 
@@ -12,7 +12,6 @@ export default {
     <p class="card__description">{{ description}}</p>
   </div>
 </template>
-
 
 <style scoped>
 

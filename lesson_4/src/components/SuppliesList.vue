@@ -16,57 +16,57 @@
 </template>
 
 <script>
-import SupplyComponent from "@/components/SupplyComponent.vue";
+import SupplyComponent from '@/components/SupplyComponent.vue';
 
 export default {
-  name: "SuppliesList",
+  name: 'SuppliesList',
   components: {
-    SupplyComponent
+    SupplyComponent,
   },
   data() {
     return {
       supplies: [
         {
-          title: "first",
+          title: 'first',
           price: 300,
-          description: "Lorem ipsum dolor sit amet, consectetur adipisicing."
+          description: 'Lorem ipsum dolor sit amet, consectetur adipisicing.',
         },
         {
-          title: "second",
+          title: 'second',
           price: 150,
-          description: "Assumenda at culpa explicabo facere porro velit?"
+          description: 'Assumenda at culpa explicabo facere porro velit?',
         },
         {
-          title: "third",
+          title: 'third',
           price: 400,
-          description: "A debitis dolor doloremque ipsum numquam velit."
+          description: 'A debitis dolor doloremque ipsum numquam velit.',
         },
         {
-          title: "fourth",
+          title: 'fourth',
           price: 200,
-          description: "Dolore esse illum incidunt. Amet, consectetur, ex?"
+          description: 'Dolore esse illum incidunt. Amet, consectetur, ex?',
         },
         {
-          title: "fifth",
+          title: 'fifth',
           price: 4500,
-          description: "Atque beatae eius eligendi itaque molestias! Unde!"
+          description: 'Atque beatae eius eligendi itaque molestias! Unde!',
         },
       ],
-      sort: "None"
+      sort: 'None',
     };
   },
   methods: {
     setSort(order) {
       this.sort = order;
-    }
+    },
   },
   computed: {
     sortedSupplies() {
-      if (this.sort === "None") return [...this.supplies];
+      if (this.sort === 'None') return [...this.supplies];
       if (this.sort === 'ASC') return [...this.supplies].sort((a, b) => a.price - b.price);
       return [...this.supplies].sort((a, b) => b.price - a.price);
-    }
-  }
+    },
+  },
 };
 </script>
 

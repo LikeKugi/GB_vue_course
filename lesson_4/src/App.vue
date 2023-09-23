@@ -1,10 +1,10 @@
 <script>
-import NewComponent from "@/components/NewComponent.vue";
-import GalleryComponent from "@/components/GalleryComponent.vue";
-import SuppliesList from "@/components/SuppliesList.vue";
+import NewComponent from '@/components/NewComponent.vue';
+import GalleryComponent from '@/components/GalleryComponent.vue';
+import SuppliesList from '@/components/SuppliesList.vue';
 
 export default {
-  name: "App",
+  name: 'App',
   components: {
     SuppliesList,
     GalleryComponent,
@@ -21,7 +21,6 @@ export default {
     <SuppliesList />
   </div>
 </template>
-
 
 <style lang="scss">
 #app {

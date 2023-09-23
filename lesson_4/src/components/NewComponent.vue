@@ -1,6 +1,6 @@
 <script>
 export default {
-  name: "NewComponent"
+  name: 'NewComponent',
 };
 </script>
 
@@ -9,7 +9,6 @@ export default {
     <h1 class="template__title">Здесь могла быть ваша реклама</h1>
   </div>
 </template>
-
 
 <style scoped
        lang="scss">
