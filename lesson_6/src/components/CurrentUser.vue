@@ -24,7 +24,7 @@ export default {
 <style scoped
        lang="scss">
 .current {
-  border: 2px solid teal;
+  border: 2px solid $bdColor;
   border-radius: 2rem;
   padding: 2rem;
   max-width: max-content;
